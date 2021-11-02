@@ -1,0 +1,4 @@
+create or replace package dpl_s_package
+is 
+procedure dpe_phone_validation(dpe_phone_validation in varchar2);
+end dpl_s_package;
