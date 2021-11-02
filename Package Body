@@ -1,0 +1,49 @@
+
+create or replace package body dpl_s_package
+is 
+procedure dpe_phone_validation(dpe_phone_validation in varchar2)
+is
+
+
+BEGIN
+   IF (LENGTH (dpe_phone_validation) = 12)
+   THEN
+      IF (INSTR (dpe_phone_validation, '-') <> 6)
+      THEN
+         dbms_output.put_line('Invalid phone number');
+      ELSE
+         IF    (dpe_phone_validation LIKE '017%')
+            OR (dpe_phone_validation LIKE '013%')
+            OR (dpe_phone_validation LIKE '019%')
+            OR (dpe_phone_validation LIKE '015%')
+            OR (dpe_phone_validation LIKE '016%')
+            OR (dpe_phone_validation LIKE '018%')
+          THEN
+             dbms_output.put_line('valid phone number');
+         ELSE
+             dbms_output.put_line('Invalid phone number');
+         END IF;
+      END IF;
+   ELSIF (LENGTH (dpe_phone_validation) = 11)
+   THEN
+      IF REGEXP_LIKE (dpe_phone_validation, '[^0-9]')
+      THEN
+         dbms_output.put_line('Wrong phone number');
+      ELSE
+         IF    (dpe_phone_validation LIKE '017%')
+            OR (dpe_phone_validation LIKE '013%')
+            OR (dpe_phone_validation LIKE '019%')
+            OR (dpe_phone_validation LIKE '015%')
+            OR (dpe_phone_validation LIKE '016%')
+            OR (dpe_phone_validation LIKE '018%')
+         THEN
+            dbms_output.put_line('valid phone number');
+         ELSE
+            dbms_output.put_line('Invalid phone number');
+         END IF;
+      END IF;
+   ELSE
+      dbms_output.put_line('Invalid phone number');
+   END IF;
+   end dpe_phone_validation;
+end;
